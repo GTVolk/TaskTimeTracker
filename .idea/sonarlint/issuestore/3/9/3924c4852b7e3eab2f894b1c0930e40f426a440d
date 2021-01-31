@@ -1,0 +1,15 @@
+
+e
+java:S1192«"IDefine a constant instead of duplicating this literal "children" 4 times.(“ñšËúÿÿÿÿ
+^
+java:S4488&"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(®ö„‰
+e
+java:S4488h"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÖéŸıÿÿÿÿ
+d
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(­Şàüÿÿÿÿ
+c
+java:S4488U"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(«Îë ÿÿÿÿÿ
+e
+java:S4488;"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡™Çşÿÿÿÿ
+_
+java:S4488Ø"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(šá±‡

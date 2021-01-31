@@ -1,0 +1,9 @@
+
+l	java:S116"WRename this field "USER_INVALID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÿÔ
+n	java:S116"YRename this field "USER_NOT_ADMIN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ØãÑ
+7
+java:S1170"!Make this final field static too.(œÿÔ
+7
+java:S1170"!Make this final field static too.(«ØãÑ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ì°Ï½

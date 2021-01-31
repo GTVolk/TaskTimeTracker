@@ -1,0 +1,9 @@
+
+e
+java:S4488M"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÖéŸıÿÿÿÿ
+^
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(®ö„‰
+c
+java:S4488d"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(«Îë ÿÿÿÿÿ
+e
+java:S4488/"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡™Çşÿÿÿÿ

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="task-time-tracker:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>task-time-tracker</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="task-time-tracker-1.0.war">
+      <element id="artifact" artifact-name="task-time-tracker:war exploded" />
+    </root>
+  </artifact>
+</component>

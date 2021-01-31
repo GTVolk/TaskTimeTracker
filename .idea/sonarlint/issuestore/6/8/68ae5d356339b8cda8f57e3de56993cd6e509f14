@@ -1,0 +1,11 @@
+
+^
+java:S4488+"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(®ö„‰
+e
+java:S4488`"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÖéŸıÿÿÿÿ
+^
+java:S4488y"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(é¡ˆÍ
+e
+java:S4488@"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡™Çşÿÿÿÿ
+L
+java:S2885"1Make "DATE_FORMAT_yyyyMMdd" an instance variable.(’·Â¶ûÿÿÿÿ
