@@ -16,13 +16,13 @@ Ext.define('TTT.model.Company', {
         },
         reader: {
             type: 'json',
-            root: 'data'
+            rootProperty: 'data'
         },
         writer: {
             type: 'json',
             allowSingle:true,
             encode:true,
-            root:'data',
+            rootProperty:'data',
             writeAllFields: true
         }
     },

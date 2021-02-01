@@ -27,12 +27,13 @@
           <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
         </descriptors>
         <webroots>
-          <root url="file://$MODULE_DIR$/src/main/webapp/ext/packages/ext-theme-classic/build/resources" relative="resources" />
+          <root url="file://$MODULE_DIR$/src/main/webapp/build/production/TTT" relative="/" />
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/target/generated-sources/annotations" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -45,9 +46,26 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/classic/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/classic/src/fx/target" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/locale/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-base/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-classic-sandbox/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-classic/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-crisp/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-gray/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-material/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-neptune-touch/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-neptune/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/classic/theme-neutral/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/modern/modern/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/packages/font-ios/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp/ext/packages/soap/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/webapp2/build" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

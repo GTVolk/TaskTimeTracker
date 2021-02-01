@@ -21,14 +21,14 @@ Ext.define('TTT.model.User', {
             destroy: 'user/remove.json'
         },
         reader: {
-            type: 'json',            
-            root: 'data'
+            type: 'json',
+            rootProperty: 'data'
         },
         writer: {
             type: 'json',
             allowSingle:false,
             encode:true,
-            root:'data',
+            rootProperty:'data',
             writeAllFields: true
         }
     },

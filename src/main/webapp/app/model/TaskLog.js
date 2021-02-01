@@ -28,14 +28,14 @@ Ext.define('TTT.model.TaskLog', {
             destroy:'taskLog/remove.json'
         },
         reader: {
-            type: 'json',            
-            root: 'data'
+            type: 'json',
+            rootProperty: 'data'
         },
         writer: {
             type: 'json',
             allowSingle:true,
             encode:true,
-            root:'data',
+            rootProperty:'data',
             writeAllFields: true
         }
     },

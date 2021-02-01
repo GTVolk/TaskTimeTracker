@@ -21,13 +21,13 @@ Ext.define('TTT.model.Task', {
         },
         reader: {
             type: 'json',
-            root: 'data'
+            rootProperty: 'data'
         },
         writer: {
             type: 'json',
             allowSingle:true,
             encode:true,
-            root:'data',
+            rootProperty:'data',
             writeAllFields: true
         }
     },

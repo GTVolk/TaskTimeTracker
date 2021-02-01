@@ -7,7 +7,7 @@ Ext.define('TTT.store.TaskLog', {
         url: 'taskLog/findByUser.json',
         reader: {
             type: 'json',
-            root: 'data'
+            rootProperty: 'data'
         }
     },
     doFindByUser: function(username, startDate, endDate) {

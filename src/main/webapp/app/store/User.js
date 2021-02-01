@@ -7,7 +7,7 @@ Ext.define('TTT.store.User', {
         url: 'user/findAll.json',
         reader: {
             type: 'json',
-            root: 'data'
+            rootProperty: 'data'
         }
     }
 });

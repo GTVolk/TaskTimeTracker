@@ -7,7 +7,7 @@ Ext.define('TTT.store.Task', {
         url:'task/findAll.json',
         reader: {
             type: 'json',
-            root: 'data'
+            rootProperty: 'data'
         }
     }    
 });

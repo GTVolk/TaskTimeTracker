@@ -1,4 +1,4 @@
-drop database task_time_tracker;
+drop database if exists task_time_tracker;
 create database task_time_tracker;
 use task_time_tracker;
 create table ttt_company(

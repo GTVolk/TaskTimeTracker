@@ -9,7 +9,7 @@ Ext.define('TTT.store.Company', {
         url: 'company/findAll.json',
         reader: {
             type: 'json',
-            root: 'data'
+            rootProperty: 'data'
         }
     }    
 });

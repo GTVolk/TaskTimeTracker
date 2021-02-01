@@ -1,11 +1,15 @@
 <!DOCTYPE HTML>
-<html>
+<html manifest="">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+
     <title>TTT</title>
-    <link rel="stylesheet" href="resources/ext-theme-classic-all.css">
-    <link rel="stylesheet" href="resources/styles.css">    
-<script type="text/javascript" src="all-classes.js"></script>
+
+    <!-- The line below must be kept intact for Sencha Cmd to build your application -->
+    <script id="microloader" data-app="be8b20e2-30d3-4a56-9d46-483ffe480fa2" type="text/javascript" src="bootstrap.js"></script>
+
 </head>
 <body></body>
 </html>

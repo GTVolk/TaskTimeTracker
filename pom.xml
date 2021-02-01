@@ -130,7 +130,8 @@
                         </goals>
                         <configuration>
                             <ignoreMissingFile>false</ignoreMissingFile>
-                            <file>src/main/webapp/all-classes.js</file>
+                            <!--<file>src/main/webapp/all-classes.js</file>-->
+                            <file>src/main/webapp/build/app.js</file>
                             <regex>false</regex>
                             <replacements>
                                 <replacement>
@@ -155,15 +156,32 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webResources>
                         <resource>
-                            <directory>src/main/webapp/ext/packages/ext-theme-classic/build/resources</directory>
-                            <targetPath>resources</targetPath>
+                            <directory>src/main/webapp/build</directory>
                             <excludes>
-                                <exclude>ext-theme-classic-all-*</exclude>
-                            </excludes>                            
-                        </resource>                            
-                    </webResources>       
-                    <packagingExcludes>.sencha/**,app/**, sass/**,overrides/**,build/**,ext/**,app.json,bootstrap.css,bootstrap.js,build.xml,
-                        index.html,index-dev.html,index-prod.html,app.js</packagingExcludes>             
+                                <exclude>**/Readme.md</exclude>
+                            </excludes>
+                        </resource>
+                    </webResources>
+                    <packagingExcludes>
+                        .sencha/**,
+                        .gitignore,
+                        app/**,
+                        build/**,
+                        ext/**,
+                        overrides/**,
+                        packages/**,
+                        sass/**,
+                        temp/**,
+                        bootstrap.css,
+                        bootstrap.js,
+                        bootstrap.json,
+                        bootstrap.jsonp,
+                        build.xml,
+                        index.html,
+                        Readme.md,
+                        *.log,
+                        workspace.json
+                    </packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -199,8 +217,8 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                             <includeScope>compile</includeScope>
-                        </configuration>                        
-                    </execution>                  
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -215,11 +233,11 @@
                     </includes>
                     <argLine>-javaagent:target/lib/spring-instrument-${spring.version}.jar</argLine>
                 </configuration>
-            </plugin>            
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>                    
+                <version>1.2.1</version>
                 <executions>
                     <execution>
                         <id>sencha-compile</id>
@@ -228,19 +246,18 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>C:\Sencha\Cmd\4.0.0.203\sencha.exe</executable>
+                            <executable>..\..\Sencha\Cmd\7.3.0.19\sencha.exe</executable>
+                            <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
                             <arguments>
-                                <argument>-sdk</argument>
-                                <argument>${basedir}/src/main/webapp/ext</argument>                                
-                                <argument>compile</argument>
-                                <argument>-classpath</argument>
-                                <argument>${basedir}/src/main/webapp/app</argument>
-                                <argument>page</argument>
-                                <argument>-yui</argument>
-                                <argument>-in</argument>
-                                <argument>${basedir}/src/main/webapp/index-dev.html</argument>
-                                <argument>-out</argument>
-                                <argument>${basedir}/src/main/webapp/index-prod.html</argument>
+                                <argument>--cwd</argument>
+                                <argument>${basedir}/src/main/webapp</argument>
+                                <argument>app</argument>
+                                <argument>build</argument>
+                                <argument>--clean</argument>
+                                <argument>--environment</argument>
+                                <argument>production</argument>
+                                <argument>--destination</argument>
+                                <argument>${basedir}/src/main/webapp/build</argument>
                             </arguments>
                         </configuration>
                     </execution>
