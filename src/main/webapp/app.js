@@ -8,7 +8,6 @@ Ext.application({
     name: 'TTT',
 
     requires: [
-        'Ext.app.Application',
         // This will automatically load all classes in the TTT namespace
         // so that application classes do not need to require each other.
         'TTT.*'

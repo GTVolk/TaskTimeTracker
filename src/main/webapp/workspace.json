@@ -3,7 +3,7 @@
      *  An array of the paths to all the applications present in this workspace
      */
     "apps": [
-        ""
+        "TTT"
     ],
 
     /**
@@ -27,12 +27,12 @@
      * with "sencha workspace install". See "sencha help workspace install" for more information.
      *
      */
-    "frameworks": {        "ext": {
+    "frameworks": {
+        "ext": {
             "path":"ext",
             "package":"ext@7.3.0.55",
             "version":"7.3.0.55"
         }
-
     },
 
     /**
