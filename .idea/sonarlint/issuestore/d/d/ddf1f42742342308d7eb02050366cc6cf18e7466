@@ -1,8 +1,0 @@
-
-f
-java:S1301f"KReplace this "switch" statement by "if" statements to increase readability.(ñà²ûÿÿÿÿ
-c
-java:S2095]"HUse try-with-resources or close this "JsonReader" in a "finally" clause.(â‘ì€øÿÿÿÿ
-c
-java:S1192"HDefine a constant instead of duplicating this literal "success" 4 times.(ïï‘¦ÿÿÿÿÿ
-s	java:S131f"YComplete cases by adding the missing enum constants or add a default case to this switch.(ñà²ûÿÿÿÿ
