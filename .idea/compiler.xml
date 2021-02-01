@@ -6,16 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TaskTimeTracker" />
+        <module name="task-time-tracker" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="task-time-tracker" target="1.7" />
       <module name="TaskTimeTracker" target="1.7" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="TaskTimeTracker" options="-endorseddirs C:\Projects\TaskTimeTracker\target/endorsed" />
+      <module name="task-time-tracker" options="-endorseddirs C:\Projects\TaskTimeTracker\target/endorsed" />
     </option>
   </component>
 </project>
