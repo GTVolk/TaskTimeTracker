@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface TaskLogDao extends GenericDao<TaskLog, Integer>{
 
-    public List<TaskLog> findByUser(User user, Date startDate, Date endDate);
-    
-    public long findTaskLogCountByTask(Task task);
-    
-    public long findTaskLogCountByUser(User user);
+    List<TaskLog> findByUser(User user, Date startDate, Date endDate);
+    long findTaskLogCountByTask(Task task);
+    long findTaskLogCountByUser(User user);
 }

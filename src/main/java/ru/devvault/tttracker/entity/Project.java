@@ -1,5 +1,7 @@
 package ru.devvault.tttracker.entity;
 
+import lombok.*;
+
 import java.util.List;
 import java.util.Objects;
 import javax.json.JsonObjectBuilder;
@@ -19,6 +21,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "ttt_project", schema = "task_time_tracker")
 @NamedQueries({
@@ -26,81 +32,51 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Project.findByIdProject", query = "SELECT p FROM Project p WHERE p.idProject = :idProject"),
     @NamedQuery(name = "Project.findByProjectName", query = "SELECT p FROM Project p WHERE p.projectName = :projectName")})
 public class Project extends AbstractEntity implements EntityItem<Integer> {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_project")
     private Integer idProject;
+
+    @NonNull
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "project_name")
     private String projectName;
+
     @JoinColumn(name = "id_company", referencedColumnName = "id_company")
     @ManyToOne(optional = false)
     private Company company;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Task> tasks;
-    public Project() { }
-
-    public Project(Integer idProject) {
-        this.idProject = idProject;
-    }
-
-    public Project(Integer idProject, String projectName) {
-        this.idProject = idProject;
-        this.projectName = projectName;
-    }
-
-    public Integer getIdProject() {
-        return idProject;
-    }
-
-    public void setIdProject(Integer idProject) {
-        this.idProject = idProject;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
 
     @Override
     public int hashCode() {
+
         int hash = 0;
         hash += (idProject != null ? idProject.hashCode() : 0);
+
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if (obj == null) {
             return false;
         }
+
         if (getClass() != obj.getClass()) {
             return false;
         }
+
         final Project other = (Project) obj;
+
         return Objects.equals(this.idProject, other.idProject);
     }
 
@@ -120,7 +96,7 @@ public class Project extends AbstractEntity implements EntityItem<Integer> {
         builder.add("idProject", idProject)
            .add("projectName", projectName);
                 
-        if(company != null){
+        if (company != null){
            company.addJson(builder);
         }
     }   

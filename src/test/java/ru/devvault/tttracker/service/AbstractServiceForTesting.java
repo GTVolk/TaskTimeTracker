@@ -10,5 +10,4 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 public abstract class AbstractServiceForTesting extends AbstractTransactionalJUnit4SpringContextTests {
 
     final protected Logger logger = LoggerFactory.getLogger(this.getClass());
-        
 }

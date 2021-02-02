@@ -1,5 +1,6 @@
 package ru.devvault.tttracker.web;
 
+import org.springframework.web.bind.annotation.*;
 import ru.devvault.tttracker.service.TaskLogService;
 import ru.devvault.tttracker.util.Result;
 import static ru.devvault.tttracker.web.SecurityHelper.getSessionUser;
@@ -15,11 +16,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.devvault.tttracker.entity.TaskLog;
 import ru.devvault.tttracker.entity.User;
 
@@ -34,44 +30,36 @@ public class TaskLogHandler extends AbstractHandler {
     
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-
         binder.registerCustomEditor(Date.class, new CustomDateEditor(DATE_FORMAT_yyyyMMdd, true));
-
     }
 
-    @RequestMapping(value="/find", method = RequestMethod.GET, produces = {"application/json"})
+    @GetMapping(value="/find", produces = {"application/json"})
     @ResponseBody
     public String find(
-            @RequestParam(value = "idTaskLog", required = true) Integer idTaskLog,
-            HttpServletRequest request) {
+            @RequestParam(value = "idTaskLog") Integer idTaskLog,
+            HttpServletRequest request
+    ) {
 
         User sessionUser = getSessionUser(request);
-
         Result<TaskLog> ar = taskLogService.find(idTaskLog, sessionUser.getUsername());
 
         if (ar.isSuccess()) {
-
             return getJsonSuccessData(ar.getData());
-
         } else {
-
             return getJsonErrorMsg(ar.getMsg());
-
         }
     }
 
-    @RequestMapping(value = "/store", method = RequestMethod.POST, produces = {"application/json"})
+    @PostMapping(value = "/store", produces = {"application/json"})
     @ResponseBody
     public String store(
-            @RequestParam(value = "data", required = true) String jsonData,
-            HttpServletRequest request) throws ParseException {
+            @RequestParam(value = "data") String jsonData,
+            HttpServletRequest request
+    ) throws ParseException {
 
         User sessionUser = getSessionUser(request);
-
         JsonObject jsonObj = parseJsonObject(jsonData);
-        
         String dateVal = jsonObj.getString("taskLogDate");
-        
         Result<TaskLog> ar = taskLogService.store(
                 getIntegerValue(jsonObj.get("idTaskLog")),
                 getIntegerValue(jsonObj.get("idTask")),
@@ -82,51 +70,42 @@ public class TaskLogHandler extends AbstractHandler {
                 sessionUser.getUsername());
 
         if (ar.isSuccess()) {
-
             return getJsonSuccessData(ar.getData());
-
         } else {
-
             return getJsonErrorMsg(ar.getMsg());
-
         }
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST, produces = {"application/json"})
+    @PostMapping(value = "/remove", produces = {"application/json"})
     @ResponseBody
     public String remove(
-            @RequestParam(value = "data", required = true) String jsonData,
-            HttpServletRequest request) {
+            @RequestParam(value = "data") String jsonData,
+            HttpServletRequest request
+    ) {
 
         User sessionUser = getSessionUser(request);
-
         JsonObject jsonObj = parseJsonObject(jsonData);
-
         Result<TaskLog> ar = taskLogService.remove(
                 getIntegerValue(jsonObj.get("idTaskLog")), 
                 sessionUser.getUsername());
 
         if (ar.isSuccess()) {
-
             return getJsonSuccessMsg(ar.getMsg());
-
         } else {
-
             return getJsonErrorMsg(ar.getMsg());
-
         }
     }
 
-    @RequestMapping(value = "/findByUser", method = RequestMethod.GET, produces = {"application/json"})
+    @GetMapping(value = "/findByUser", produces = {"application/json"})
     @ResponseBody
     public String findByUser(
-            @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "startDate", required = true) Date startDate,
-            @RequestParam(value = "endDate", required = true) Date endDate,
-            HttpServletRequest request) {
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "startDate") Date startDate,
+            @RequestParam(value = "endDate") Date endDate,
+            HttpServletRequest request
+    ) {
 
         User sessionUser = getSessionUser(request);
-
         Result<List<TaskLog>> ar = taskLogService.findByUser(
                 username,
                 startDate,
@@ -134,13 +113,9 @@ public class TaskLogHandler extends AbstractHandler {
                 sessionUser.getUsername());
 
         if (ar.isSuccess()) {
-
             return getJsonSuccessData(ar.getData());
-
         } else {
-
             return getJsonErrorMsg(ar.getMsg());
-
         }
     }
  }

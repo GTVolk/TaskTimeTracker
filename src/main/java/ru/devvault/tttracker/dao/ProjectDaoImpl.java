@@ -8,8 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("projectDao")
 @Transactional
-public class ProjectDaoImpl extends GenericDaoImpl<Project, Integer>
-    implements ProjectDao {
+public class ProjectDaoImpl extends GenericDaoImpl<Project, Integer> implements ProjectDao {
   
     public ProjectDaoImpl() {
         super(Project.class);

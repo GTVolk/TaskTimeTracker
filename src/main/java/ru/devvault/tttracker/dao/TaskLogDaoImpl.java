@@ -31,20 +31,16 @@ public class TaskLogDaoImpl extends GenericDaoImpl<TaskLog, Integer> implements 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public long findTaskLogCountByTask(Task task) {
-        Long count = (Long) em.createNamedQuery("TaskLog.findTaskLogCountByTask")
+        return (Long) em.createNamedQuery("TaskLog.findTaskLogCountByTask")
                 .setParameter("task", task)
                 .getSingleResult();
-
-        return count;
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public long findTaskLogCountByUser(User user) {
-        Long count = (Long) em.createNamedQuery("TaskLog.findTaskLogCountByUser")
+        return (Long) em.createNamedQuery("TaskLog.findTaskLogCountByUser")
                 .setParameter("user", user)
                 .getSingleResult();
-
-        return count;
     }
 }

@@ -13,16 +13,16 @@ import static org.junit.Assert.*;
 
 public class CompanyDaoTest extends AbstractDaoForTesting {
 
-    public CompanyDaoTest(){}
+    public CompanyDaoTest() {}
 
     /**
      * Test case for the find(id) method of the CompanyDao implementation
-     * @throws Exception
      */
     @Test
-    public void testFind() throws Exception {
+    public void testFind() {
 
         logger.debug("\nSTARTED testFind()\n");
+
         List<Company> allItems = companyDao.findAll();
 
         assertTrue(allItems.size() > 0);
@@ -34,39 +34,40 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
         Company c2 = companyDao.find(id);
 
         assertEquals(c1, c2);
+
         logger.debug("\nFINISHED testFind()\n");
     }
 
     /**
      * Test case for the findAll() method of the CompanyDao implementation
-     * @throws Exception
      */
     @Test
-    public void testFindAll() throws Exception {
+    public void testFindAll() {
 
         logger.debug("\nSTARTED testFindAll()\n");
+
         int rowCount = countRowsInTable("ttt_company");
 
-        if(rowCount > 0){
+        if (rowCount > 0) {
 
             List<Company> allItems = companyDao.findAll();
             assertEquals("Company.findAll list not equal to row count of table ttt_company", rowCount, allItems.size());
-
         } else {
             throw new IllegalStateException("INVALID TESTING SCENARIO: Company table is empty");
         }
+
         logger.debug("\nFINISHED testFindAll()\n");
     }
 
     /**
      * Test case for the persist(Company) method of the CompanyDao implementation
-     * @throws Exception
      */
     @Test
     //@Rollback(false)
-    public void testPersist() throws Exception {
+    public void testPersist() {
 
         logger.debug("\nSTARTED testPersist()\n");
+
         Company c = new Company();
         final String NEW_NAME = "Persist Test Company name";
         c.setCompanyName(NEW_NAME);
@@ -80,12 +81,12 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
 
     /**
      * Test case for the merge(Company) method of the CompanyDao implementation
-     * @throws Exception
      */
     @Test
-    public void testMerge() throws Exception {
+    public void testMerge() {
 
         logger.debug("\nSTARTED testMerge()\n");
+
         final String NEW_NAME = "Merge Test Company New Name";
 
         Company c = companyDao.findAll().get(0);
@@ -101,12 +102,12 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
 
     /**
      * Test case for the remove(Company) method of the CompanyDao implementation
-     * @throws Exception
      */
     @Test
-    public void testRemove() throws Exception {
+    public void testRemove() {
 
         logger.debug("\nSTARTED testRemove()\n");
+
         Company c = companyDao.findAll().get(0);
 
         companyDao.remove(c);

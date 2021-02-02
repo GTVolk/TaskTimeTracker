@@ -5,11 +5,8 @@ import java.util.List;
 
 public interface UserDao extends GenericDao<User, String> {
 
-    public List<User> findAll();
-
-    public User findByUsernamePassword(String username, String password);
-
-    public User findByUsername(String username);
-
-    public User findByEmail(String email);
+    List<User> findAll();
+    User findByUsernamePassword(String username, String password);
+    User findByUsername(String username);
+    User findByEmail(String email);
 }

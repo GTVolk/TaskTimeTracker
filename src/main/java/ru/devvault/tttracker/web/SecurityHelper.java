@@ -8,20 +8,20 @@ public class SecurityHelper {
 
     static final String SESSION_ATTRIB_USER = "sessionuser";
 
+    private SecurityHelper() {
+    }
+
     public static User getSessionUser(HttpServletRequest request) {
 
         User user = null;
 
         HttpSession session = request.getSession(true);
-
         Object obj = session.getAttribute(SESSION_ATTRIB_USER);
 
-        if (obj != null && obj instanceof User) {
+        if (obj instanceof User) {
             user = (User) obj;
         }
 
         return user;
-
     }
-
 }

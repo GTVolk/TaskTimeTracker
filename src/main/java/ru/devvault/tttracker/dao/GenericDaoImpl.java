@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T, ID> {
 
     final protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @PersistenceContext(unitName = "tttPU")
     protected EntityManager em;
+
     private final Class<T> type;
 
     public GenericDaoImpl(Class<T> type1) {
@@ -27,12 +29,13 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void persist(T o) {
         em.persist(o);
         em.flush();
 
         if (o instanceof EntityItem) {
+
             EntityItem<ID> item = (EntityItem<ID>) o;
             ID id = item.getId();
             logger.info("The " + o.getClass().getName() + " record with ID=" + id + " has been inserted");
@@ -40,7 +43,7 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public T merge(T o) {
 
         o = em.merge(o);
@@ -48,12 +51,13 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void remove(T o) {
         o = merge(o);
         em.remove(o);
 
         if (o instanceof EntityItem) {
+
             EntityItem<ID> item = (EntityItem<ID>) o;
             ID id = item.getId();
             logger.warn("The " + o.getClass().getName() + " record with ID=" + id + " has been deleted");

@@ -5,7 +5,6 @@ import javax.json.JsonObjectBuilder;
 
 public interface JsonItem{
 
-    public JsonObject toJson();
-    public void addJson(JsonObjectBuilder builder);
-
+    JsonObject toJson();
+    void addJson(JsonObjectBuilder builder);
 }

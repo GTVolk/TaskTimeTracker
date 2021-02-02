@@ -25,18 +25,14 @@ public class UserServiceImpl extends AbstractService implements UserService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<User> find(String username, String actionUsername) {
-
-        if(isValidUser(actionUsername)) {
-
-            User user = userDao.findByUsername(username);
-            return ResultFactory.getSuccessResult(user);
-
+        if (isValidUser(actionUsername)) {
+            return ResultFactory.getSuccessResult(userDao.findByUsername(username));
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Result<User> store(
         String username,
@@ -45,32 +41,25 @@ public class UserServiceImpl extends AbstractService implements UserService {
         String email,
         String password,
         Character adminRole,
-        String actionUsername) {
+        String actionUsername
+    ) {
 
         User actionUser = userDao.find(actionUsername);
         
         if (!actionUser.isAdmin()) {
-
             return ResultFactory.getFailResult(USER_NOT_ADMIN);
-
         }
 
         if (username == null || username.trim().isEmpty() || email == null || email.trim().isEmpty() ) {
-
             return ResultFactory.getFailResult("Unable to store a user without a valid non empty username/email");
-
         }
 
-        if(password == null || password.length() == 0){
-
+        if (password == null || password.length() == 0) {
             return ResultFactory.getFailResult("Unable to store a user without a valid non empty password");
-
         }
 
-        if(!adminRole.equals('Y') && !adminRole.equals('N')){
-
+        if (!adminRole.equals('Y') && !adminRole.equals('N')) {
             return ResultFactory.getFailResult("Unable to store the user: adminRole must be Y or N");
-
         }
 
         username = username.trim();
@@ -81,8 +70,9 @@ public class UserServiceImpl extends AbstractService implements UserService {
         User testByEmailUser = userDao.findByEmail(email);
         boolean doInsert = false;
 
-        if(user == null){
-            if(testByEmailUser == null){
+        if (user == null) {
+            if (testByEmailUser == null) {
+
                 user = new User();
                 user.setUsername(username);
                 user.setEmail(email);
@@ -90,7 +80,6 @@ public class UserServiceImpl extends AbstractService implements UserService {
             } else {
                 return ResultFactory.getFailResult("Unable to add new user: the email address is already in use");
             }
-            
         } else {
             if(testByEmailUser == null){
                 user.setEmail(email);
@@ -107,61 +96,47 @@ public class UserServiceImpl extends AbstractService implements UserService {
         user.setAdminRole(adminRole);
 
         if(doInsert) {
-
             userDao.persist(user);
-
         } else {
-
             user = userDao.merge(user);
-
         }
 
         return ResultFactory.getSuccessResult(user);
 
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Result<User> remove(String username, String actionUsername){
 
         User actionUser = userDao.find(actionUsername);
         
         if (!actionUser.isAdmin()) {
-
             return ResultFactory.getFailResult(USER_NOT_ADMIN);
-
         }
 
-        if(actionUsername.equalsIgnoreCase(username)){
-
+        if (actionUsername.equalsIgnoreCase(username)) {
             return ResultFactory.getFailResult("It is not allowed to delete yourself!");
-
         }
 
-        if(username == null){
-
+        if (username == null) {
             return ResultFactory.getFailResult("Unable to remove null User");
-
         } 
 
         User user = userDao.findByUsername(username);
-
         long taskLogCount = taskLogDao.findTaskLogCountByUser(user);
 
-        if(user == null) {
-
+        if (user == null) {
             return ResultFactory.getFailResult("Unable to load User for removal with username=" + username);
-
         } else if(taskLogCount > 0) {
             return ResultFactory.getFailResult("Unable to remove User with username=" + username + " as valid task logs are assigned");
-
         } else {
 
             userDao.remove(user);
             String msg = "User " + username + " was deleted by " + actionUsername;
             logger.info(msg);
-            return ResultFactory.getSuccessResultMsg(msg);
 
+            return ResultFactory.getSuccessResultMsg(msg);
         }
 
     }
@@ -169,10 +144,8 @@ public class UserServiceImpl extends AbstractService implements UserService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<List<User>> findAll(String actionUsername){
-        if(isValidUser(actionUsername)) {
-
+        if (isValidUser(actionUsername)) {
             return ResultFactory.getSuccessResult(userDao.findAll());
-
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
@@ -183,15 +156,10 @@ public class UserServiceImpl extends AbstractService implements UserService {
     public Result<User> findByUsernamePassword(String username, String password){
 
         User user = userDao.findByUsernamePassword(username, password);
-
-        if(user == null){
-
+        if (user == null) {
             return ResultFactory.getFailResult("Unable to verify user/password combination!");
-
         } else {
-
             return ResultFactory.getSuccessResult(user);
         }
-
     }
 }

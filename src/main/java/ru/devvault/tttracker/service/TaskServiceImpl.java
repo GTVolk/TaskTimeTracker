@@ -21,11 +21,13 @@ public class TaskServiceImpl extends AbstractService implements TaskService {
 
     @Autowired
     protected TaskDao taskDao;
+
     @Autowired
-    protected TaskLogDao taskLogDao;     
+    protected TaskLogDao taskLogDao;
+
     @Autowired
     protected ProjectDao projectDao;    
-    
+
     public TaskServiceImpl() {
         super();
     }
@@ -33,66 +35,57 @@ public class TaskServiceImpl extends AbstractService implements TaskService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<Task> find(Integer idTask, String actionUsername) {
-
-        if(isValidUser(actionUsername)) {
+        if (isValidUser(actionUsername)) {
             return ResultFactory.getSuccessResult(taskDao.find(idTask));
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
-
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Result<Task> store(
         Integer idTask,
         Integer idProject,
         String taskName,
-        String actionUsername) {
+        String actionUsername
+    ) {
 
         User actionUser = userDao.find(actionUsername);
         
         if (!actionUser.isAdmin()) {
-
             return ResultFactory.getFailResult(USER_NOT_ADMIN);
         }
 
         Project project = projectDao.find(idProject);
         
-        if(project == null){
+        if (project == null) {
             return ResultFactory.getFailResult("Unable to store task without a valid project [idProject=" + idProject + "]");
         }
 
         Task task;
-
         if (idTask == null) {
 
             task = new Task();
             task.setProject(project);
             project.getTasks().add(task);
-
         } else {
 
             task = taskDao.find(idTask);
-
             if(task == null) {
-                
                 return ResultFactory.getFailResult("Unable to find task instance with idTask=" + idTask);
-                
-            } else {
+            } else if (!task.getProject().equals(project)) {
 
-                if(! task.getProject().equals(project)){
-                    Project currentProject = task.getProject();
-                    task.setProject(project);
-                    project.getTasks().add(task);
-                    currentProject.getTasks().remove(task);
-                }
+                Project currentProject = task.getProject();
+                task.setProject(project);
+                project.getTasks().add(task);
+                currentProject.getTasks().remove(task);
             }
         }
 
         task.setTaskName(taskName);
 
-        if(task.getId() == null) {
+        if (task.getId() == null) {
             taskDao.persist(task);
         } else {
             task = taskDao.merge(task);
@@ -101,34 +94,27 @@ public class TaskServiceImpl extends AbstractService implements TaskService {
         return ResultFactory.getSuccessResult(task);
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Result<Task> remove(Integer idTask, String actionUsername){
 
         User actionUser = userDao.find(actionUsername);
         
         if (!actionUser.isAdmin()) {
-
             return ResultFactory.getFailResult(USER_NOT_ADMIN);
         }
 
-        if(idTask == null){
-
+        if (idTask == null) {
             return ResultFactory.getFailResult("Unable to remove Task [null idTask]");
-
         } else {
 
             Task task = taskDao.find(idTask);
             long taskLogCount = taskLogDao.findTaskLogCountByTask(task);
 
-            if(task == null) {
-
+            if (task == null) {
                 return ResultFactory.getFailResult("Unable to load Task for removal with idTask=" + idTask);
-
             } else if(taskLogCount > 0) {
-
                 return ResultFactory.getFailResult("Unable to remove Task with idTask=" + idTask + " as valid task logs are assigned");
-
             } else {
 
                 Project project = task.getProject();
@@ -139,6 +125,7 @@ public class TaskServiceImpl extends AbstractService implements TaskService {
 
                 String msg = "Task " + task.getTaskName() + " was deleted by " + actionUsername;
                 logger.info(msg);
+
                 return ResultFactory.getSuccessResultMsg(msg);
             }
         }
@@ -147,8 +134,7 @@ public class TaskServiceImpl extends AbstractService implements TaskService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<List<Task>> findAll(String actionUsername){
-
-        if(isValidUser(actionUsername)){
+        if (isValidUser(actionUsername)){
             return ResultFactory.getSuccessResult(taskDao.findAll());
         } else {
             return ResultFactory.getFailResult(USER_INVALID);

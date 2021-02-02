@@ -19,7 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ProjectServiceImpl extends AbstractService implements ProjectService {
 
     @Autowired
-    protected CompanyDao companyDao;    
+    protected CompanyDao companyDao;
+
     @Autowired
     protected ProjectDao projectDao;
 
@@ -30,114 +31,90 @@ public class ProjectServiceImpl extends AbstractService implements ProjectServic
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<Project> find(Integer idProject, String actionUsername) {
-
-        if(isValidUser(actionUsername)) {
-
-            Project project = projectDao.find(idProject);
-            return ResultFactory.getSuccessResult(project);
-
+        if (isValidUser(actionUsername)) {
+            return ResultFactory.getSuccessResult(projectDao.find(idProject));
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Result<Project> store(
         Integer idProject,
         Integer idCompany,
         String projectName,
-        String actionUsername) {
+        String actionUsername
+    ) {
 
         User actionUser = userDao.find(actionUsername);
         
         if (!actionUser.isAdmin()) {
-
             return ResultFactory.getFailResult(USER_NOT_ADMIN);
-
         }
 
         Project project;
         Company company = companyDao.find(idCompany);
 
         if (idProject == null) {
+
             project = new Project();
 
             if(company == null){
-
                 return ResultFactory.getFailResult("Unable to add new project without a valid company [idCompany=" + idCompany + "]");
-
             } else {
+
                 project.setCompany(company);
                 company.getProjects().add(project);
             }
-
         } else {
+
             project = projectDao.find(idProject);
-
-            if(project == null) {
-
+            if (project == null) {
                 return ResultFactory.getFailResult("Unable to find project instance with ID=" + idProject);
+            } else if (company != null && !project.getCompany().equals(company)){
 
-            } else {
+                Company currentCompany = project.getCompany();
+                project.setCompany(company);
+                company.getProjects().add(project);
 
-                if(company != null){
-                    if( ! project.getCompany().equals(company)){
-
-                        Company currentCompany = project.getCompany();
-                        project.setCompany(company);
-                        company.getProjects().add(project);
-
-                        currentCompany.getProjects().remove(project);
-                    }
-                }
+                currentCompany.getProjects().remove(project);
             }
         }
 
         project.setProjectName(projectName);
 
-        if(project.getIdProject() == null) {
-
+        if(project.getId() == null) {
             projectDao.persist(project);
-
         } else {
-
             project = projectDao.merge(project);
-
         }
 
         return ResultFactory.getSuccessResult(project);
-
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Result<Project> remove(Integer idProject, String actionUsername){
 
         User actionUser = userDao.find(actionUsername);
         
         if (!actionUser.isAdmin()) {
-
             return ResultFactory.getFailResult(USER_NOT_ADMIN);
-
         }
 
         if(idProject == null){
-
             return ResultFactory.getFailResult("Unable to remove Project with a null idProject");
-
         } 
 
         Project project = projectDao.find(idProject);
 
         if(project == null) {
-
             return ResultFactory.getFailResult("Unable to load Project for removal with idProject=" + idProject);
-
         } else if (project.getTasks() != null && ! project.getTasks().isEmpty() ) {
             return ResultFactory.getFailResult("Unable to remove Project with idProject=" + idProject + " as valid tasks are assigned");
-
         } else {
+
             Company company = project.getCompany();
 
             projectDao.remove(project);
@@ -145,25 +122,18 @@ public class ProjectServiceImpl extends AbstractService implements ProjectServic
 
             String msg = "Project " + project.getProjectName() + " was deleted by " + actionUsername;
             logger.info(msg);
+
             return ResultFactory.getSuccessResultMsg(msg);
-
         }
-
     }
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<List<Project>> findAll(String actionUsername){
-
-        if(isValidUser(actionUsername)){
-
+        if (isValidUser(actionUsername)){
             return ResultFactory.getSuccessResult(projectDao.findAll());
-
         } else {
-
             return ResultFactory.getFailResult(USER_INVALID);
-
         }
-
     }
 }

@@ -22,12 +22,10 @@ public abstract class AbstractHandler {
     public static String getJsonSuccessData(List<? extends JsonItem> results) {
 
         final JsonObjectBuilder builder = Json.createObjectBuilder();
-        builder.add("success", true);
-
         final JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 
+        builder.add("success", true);
         for (JsonItem ji : results) {
-
             arrayBuilder.add(ji.toJson());
         }
         
@@ -39,16 +37,17 @@ public abstract class AbstractHandler {
     public static String getJsonSuccessData(JsonItem jsonItem) {
 
         final JsonObjectBuilder builder = Json.createObjectBuilder();
+
         builder.add("success", true);
         builder.add("data", jsonItem.toJson());
 
         return toJsonString(builder.build());
-
     }
 
     public static String getJsonSuccessData(JsonItem jsonItem, int totalCount) {
 
         final JsonObjectBuilder builder = Json.createObjectBuilder();
+
         builder.add("success", true);
         builder.add("total", totalCount);
         builder.add("data", jsonItem.toJson());
@@ -57,19 +56,17 @@ public abstract class AbstractHandler {
     }
 
     public static String getJsonErrorMsg(String theErrorMessage) {
-
         return getJsonMsg(theErrorMessage, false);
-
     }
 
     public static String getJsonSuccessMsg(String msg) {
-
         return getJsonMsg(msg, true);
     }
 
     public static String getJsonMsg(String msg, boolean success) {
 
         final JsonObjectBuilder builder = Json.createObjectBuilder();
+
         builder.add("success", success);
         builder.add("msg", msg);
 
@@ -89,10 +86,7 @@ public abstract class AbstractHandler {
     }
 
     protected JsonObject parseJsonObject(String jsonString) {
-
-        JsonReader reader = Json.createReader(new StringReader(jsonString));
-        return reader.readObject();
-
+        return Json.createReader(new StringReader(jsonString)).readObject();
     }
 
     protected Integer getIntegerValue(JsonValue jsonValue) {
@@ -102,10 +96,13 @@ public abstract class AbstractHandler {
         switch (jsonValue.getValueType()) {
             
             case NUMBER:
+
                 JsonNumber num = (JsonNumber) jsonValue;
                 value = num.intValue();
+
                 break;
             case NULL:
+            default:
                 break;
         }
         

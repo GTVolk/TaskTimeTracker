@@ -7,7 +7,7 @@ import java.util.Date;
 
 public interface TaskLogService {
 
-    public Result<TaskLog> store(
+    Result<TaskLog> store(
             Integer idTaskLog,
             Integer idTask,
             String username,
@@ -16,8 +16,8 @@ public interface TaskLogService {
             int taskMinutes,
             String actionUsername);
 
-    public Result<TaskLog> remove(Integer idTaskLog, String actionUsername);
-    public Result<TaskLog> find(Integer idTaskLog, String actionUsername);
-    public Result<List<TaskLog>> findByUser(String username, Date startDate, Date endDate, String actionUsername);
+    Result<TaskLog> remove(Integer idTaskLog, String actionUsername);
+    Result<TaskLog> find(Integer idTaskLog, String actionUsername);
+    Result<List<TaskLog>> findByUser(String username, Date startDate, Date endDate, String actionUsername);
 
 }

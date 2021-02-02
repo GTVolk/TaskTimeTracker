@@ -16,14 +16,16 @@ public class CompanyServiceTest extends AbstractServiceForTesting {
     private final String TEST_USERNAME = "admin";
 
     @Autowired
-    protected CompanyService companyService;    
+    protected CompanyService companyService;
+
     @Autowired
     protected ProjectDao projectDao; 
 
     @Test
-    public void testFind() throws Exception {
+    public void testFind() {
         
         logger.debug("\nSTARTED testFind()\n");
+
         Result<List<Company>> allItems = companyService.findAll(TEST_USERNAME);
         
         assertTrue(allItems.getData().size() > 0);
@@ -36,36 +38,36 @@ public class CompanyServiceTest extends AbstractServiceForTesting {
         Result<Company> c2 = companyService.find(id, TEST_USERNAME);
 
         assertEquals(c1, c2.getData());
+
         logger.debug("\nFINISHED testFind()\n");
     }    
     
     /**
      * Test case for the findAll() method of the CompanyService implementation
-     * @throws Exception 
      */
     @Test
-    public void testFindAll() throws Exception {
+    public void testFindAll() {
         
         logger.debug("\nSTARTED testFindAll()\n");
+
         int rowCount = countRowsInTable("ttt_company");
         
-        if(rowCount > 0){                       
+        if (rowCount > 0) {
             
             Result<List<Company>> allItems = companyService.findAll(TEST_USERNAME);
             assertEquals("Company.findAll list not equal to row count of table ttt_company", rowCount, allItems.getData().size());
-            
         } else {
             throw new IllegalStateException("INVALID TESTING SCENARIO: Company table is empty");
         }
+
         logger.debug("\nFINISHED testFindAll()\n");
     }    
 
     /**
      * Test case adding a new company of the CompanyService implementation
-     * @throws Exception 
      */    
     //@Test
-    public void testAddNew() throws Exception {
+    public void testAddNew() {
         
         logger.debug("\nSTARTED testAddNew()\n");
 
@@ -80,12 +82,12 @@ public class CompanyServiceTest extends AbstractServiceForTesting {
     
     /**
      * Test case for updating a company of the CompanyService implementation
-     * @throws Exception 
      */    
     @Test
-    public void testUpdate() throws Exception {
+    public void testUpdate() {
         
         logger.debug("\nSTARTED testUpdate()\n");
+
         final String NEW_NAME = "Update Test Company New Name";
 
         Result<List<Company>> ar1 = companyService.findAll(TEST_USERNAME);
@@ -102,12 +104,12 @@ public class CompanyServiceTest extends AbstractServiceForTesting {
     
     /**
      * Test case for the remove(Company) method of the CompanyService implementation
-     * @throws Exception 
      */    
     @Test
-    public void testRemove() throws Exception {
+    public void testRemove() {
         
         logger.debug("\nSTARTED testRemove()\n");
+
         Result<List<Company>> ar1 = companyService.findAll(TEST_USERNAME);
         Company c = ar1.getData().get(0);
         

@@ -1,5 +1,7 @@
 package ru.devvault.tttracker.entity;
 
+import lombok.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -20,6 +22,10 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "ttt_task_log", schema = "task_time_tracker")
 @NamedQueries({
@@ -30,112 +36,64 @@ import javax.validation.constraints.Size;
 public class TaskLog extends AbstractEntity implements EntityItem<Integer> {
 
     static final SimpleDateFormat DATE_FORMAT_yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
-    
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_task_log")
     private Integer idTaskLog;
+
+    @NonNull
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2000)
     @Column(name = "task_description")
     private String taskDescription;
+
+    @NonNull
     @Basic(optional = false)
     @NotNull
     @Column(name = "task_log_date")
     @Temporal(TemporalType.DATE)
     private Date taskLogDate;
+
+    @NonNull
     @Basic(optional = false)
     @NotNull
     @Column(name = "task_minutes")
     private Integer taskMinutes;
+
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne(optional = false)
     private User user;
+
     @JoinColumn(name = "id_task", referencedColumnName = "id_task")
     @ManyToOne(optional = false)
     private Task task;
 
-    public TaskLog() {
-    }
-
-    public TaskLog(Integer idTaskLog) {
-        this.idTaskLog = idTaskLog;
-    }
-
-    public TaskLog(Integer idTaskLog, String taskDescription, Date taskLogDate, int taskMinutes) {
-        this.idTaskLog = idTaskLog;
-        this.taskDescription = taskDescription;
-        this.taskLogDate = taskLogDate;
-        this.taskMinutes = taskMinutes;
-    }
-
-    public Integer getIdTaskLog() {
-        return idTaskLog;
-    }
-
-    public void setIdTaskLog(Integer idTaskLog) {
-        this.idTaskLog = idTaskLog;
-    }
-
-    public String getTaskDescription() {
-        return taskDescription;
-    }
-
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
-    }
-
-    public Date getTaskLogDate() {
-        return taskLogDate;
-    }
-
-    public void setTaskLogDate(Date taskLogDate) {
-        this.taskLogDate = taskLogDate;
-    }
-
-    public int getTaskMinutes() {
-        return taskMinutes;
-    }
-
-    public void setTaskMinutes(Integer taskMinutes) {
-        this.taskMinutes = taskMinutes;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
     @Override
     public int hashCode() {
+
         int hash = 0;
         hash += (idTaskLog != null ? idTaskLog.hashCode() : 0);
+
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if (obj == null) {
             return false;
         }
+
         if (getClass() != obj.getClass()) {
             return false;
         }
+
         final TaskLog other = (TaskLog) obj;
+
         return Objects.equals(this.idTaskLog, other.idTaskLog);
     }
 
@@ -160,6 +118,7 @@ public class TaskLog extends AbstractEntity implements EntityItem<Integer> {
         if (user != null) {
             user.addJson(builder);
         }
+
         if (task != null) {
             task.addJson(builder);            
         }

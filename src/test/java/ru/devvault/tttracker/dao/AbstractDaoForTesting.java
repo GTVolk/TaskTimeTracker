@@ -15,15 +15,20 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 public abstract class AbstractDaoForTesting extends AbstractTransactionalJUnit4SpringContextTests {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired(required = true)
+
+    @Autowired
     protected CompanyDao companyDao;
-    @Autowired(required = true)
+
+    @Autowired
     protected ProjectDao projectDao;
-    @Autowired(required = true)
+
+    @Autowired
     protected TaskDao taskDao;
-    @Autowired(required = true)
+
+    @Autowired
     protected UserDao userDao;
-    @Autowired(required = true)
+
+    @Autowired
     protected TaskLogDao taskLogDao;
 
 }

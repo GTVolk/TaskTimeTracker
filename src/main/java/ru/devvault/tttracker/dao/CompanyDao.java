@@ -5,6 +5,5 @@ import java.util.List;
 
 public interface CompanyDao extends GenericDao<Company, Integer>{
 
-    public List<Company> findAll();
-    
+    List<Company> findAll();
 }

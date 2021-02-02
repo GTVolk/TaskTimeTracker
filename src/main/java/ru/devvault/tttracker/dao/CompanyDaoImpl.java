@@ -8,8 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("companyDao")
 @Transactional
-public class CompanyDaoImpl extends GenericDaoImpl<Company, Integer>
-    implements CompanyDao {
+public class CompanyDaoImpl extends GenericDaoImpl<Company, Integer> implements CompanyDao {
 
     public CompanyDaoImpl() {
         super(Company.class);
@@ -20,5 +19,5 @@ public class CompanyDaoImpl extends GenericDaoImpl<Company, Integer>
     public List<Company> findAll() {
         return em.createNamedQuery("Company.findAll")
                 .getResultList();
-    }    
+    }
 }

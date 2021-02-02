@@ -2,11 +2,8 @@ package ru.devvault.tttracker.dao;
 
 public interface GenericDao<T, ID> {
 
-    public T find(ID id);
-
-    public void persist(T obj);
-
-    public T merge(T obj);
-
-    public void remove(T obj);
+    T find(ID id);
+    void persist(T obj);
+    T merge(T obj);
+    void remove(T obj);
 }

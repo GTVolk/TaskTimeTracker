@@ -15,9 +15,7 @@ public class WebAppConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry
                 .addInterceptor(new UserInSessionInterceptor())
-                .addPathPatterns(new String[]{
-                    "/**"
-                })
+                .addPathPatterns("/**")
                 .excludePathPatterns("/security/**");
     }
 }

@@ -17,18 +17,21 @@ public class UserServiceTest extends AbstractServiceForTesting {
 
     @Autowired
     protected UserService userService;
+
     @Autowired
     protected TaskLogDao taskLogDao;
+
     @Autowired
     protected UserDao userDao;
+
     private final String TEST_USERNAME = "admin";
 
     @Test
-    public void testAddNew() throws Exception {
-
-        String ADMIN_USERNAME = "admin";
+    public void testAddNew() {
 
         logger.debug("\nSTARTED testAddNew()\n");
+
+        String ADMIN_USERNAME = "admin";
 
         Result<User> ar = userService.store("nusername", "David", "Francis", "df@tttracker.com", "admpwd", 'N', ADMIN_USERNAME);
 
@@ -63,18 +66,17 @@ public class UserServiceTest extends AbstractServiceForTesting {
      * Test case for the remove(Company) method of the CompanyService
      * implementation
      *
-     * @throws Exception
      */
     @Test
-    public void testRemove() throws Exception {
+    public void testRemove() {
+
+        logger.debug("\nSTARTED testRemove()\n");
 
         String ADMIN_USERNAME = "admin";
         Calendar DEFAULT_START_DATE = Calendar.getInstance();
         Calendar DEFAULT_END_DATE = Calendar.getInstance();
         DEFAULT_START_DATE.set(Calendar.YEAR, 1900);
         DEFAULT_END_DATE.set(Calendar.YEAR, 3000);
-        
-        logger.debug("\nSTARTED testRemove()\n");
 
         User user1 = userDao.find(TEST_USERNAME);
 
@@ -86,14 +88,12 @@ public class UserServiceTest extends AbstractServiceForTesting {
             ar = userService.remove(TEST_USERNAME, ADMIN_USERNAME);
             logger.debug(ar.getMsg());
             assertTrue("Delete of user should be allowed as no task logs assigned!", ar.isSuccess());
-
         } else {
 
             // this user has task log assigned
             ar = userService.remove(TEST_USERNAME, ADMIN_USERNAME);
             logger.debug(ar.getMsg());
             assertFalse("Cascading delete of user to task logs not allowed!", ar.isSuccess());
-
         }
 
         logs = taskLogDao.findByUser(user1, DEFAULT_START_DATE.getTime(), DEFAULT_END_DATE.getTime());
@@ -102,14 +102,12 @@ public class UserServiceTest extends AbstractServiceForTesting {
             ar = userService.remove(TEST_USERNAME, ADMIN_USERNAME);
             logger.debug(ar.getMsg());
             assertTrue("Delete of user should be allowed as empty task log list!", ar.isSuccess());
-
         } else {
 
             // this user has task log assigned
             ar = userService.remove(TEST_USERNAME, ADMIN_USERNAME);
             logger.debug(ar.getMsg());
             assertFalse("Cascading delete of user to task logs not allowed!", ar.isSuccess());
-
         }
 
         ar = userService.remove(ADMIN_USERNAME, ADMIN_USERNAME);
@@ -121,6 +119,8 @@ public class UserServiceTest extends AbstractServiceForTesting {
 
     @Test
     public void testLogon() {
+
+        logger.debug("\nSTARTED testLogon()\n");
 
         Result<User> ar = userService.findByUsernamePassword("admin", "admin");
 
@@ -144,5 +144,7 @@ public class UserServiceTest extends AbstractServiceForTesting {
         ar = userService.findByUsernamePassword("blah", "blah");
         assertNull("Invalid user verified with wrong username and password", ar.getData());
         assertFalse(ar.isSuccess());
+
+        logger.debug("\nFINISHED testLogon()\n");
     }
 }

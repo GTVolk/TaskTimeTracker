@@ -6,13 +6,12 @@ import ru.devvault.tttracker.util.Result;
 
 public interface CompanyService {
 
-    public Result<Company> store(
+    Result<Company> store(
             Integer idCompany,
             String companyName,
             String actionUsername);
 
-    public Result<Company> remove(Integer idCompany, String actionUsername);
-    public Result<Company> find(Integer idCompany, String actionUsername);
-    public Result<List<Company>> findAll(String actionUsername);
-
+    Result<Company> remove(Integer idCompany, String actionUsername);
+    Result<Company> find(Integer idCompany, String actionUsername);
+    Result<List<Company>> findAll(String actionUsername);
 }

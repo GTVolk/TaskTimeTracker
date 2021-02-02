@@ -51,10 +51,9 @@ public class Result<T> implements Serializable {
 
             List castList = (List) data;
             if(castList.isEmpty()){
-
                 sb.append("empty list");
-
             } else {
+
                 Object firstItem = castList.get(0);
 
                 sb.append("List of ").append(firstItem.getClass());
@@ -72,24 +71,30 @@ public class Result<T> implements Serializable {
 
     @Override
     public int hashCode() {
+
         int hash = 7;
         hash = 89 * hash + (this.success ? 1 : 0);
         hash = 89 * hash + Objects.hashCode(this.data);
+
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if (obj == null) {
             return false;
         }
+
         if (getClass() != obj.getClass()) {
             return false;
         }
+
         final Result<?> other = (Result<?>) obj;
         if (this.success != other.success) {
             return false;
         }
+
         return Objects.deepEquals(this.data, other.data);
     }
 }

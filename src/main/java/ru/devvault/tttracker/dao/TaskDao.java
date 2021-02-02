@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface TaskDao extends GenericDao<Task, Integer>{
    
-    public List<Task> findAll();    
+    List<Task> findAll();
 }
