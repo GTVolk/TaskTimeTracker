@@ -1,6 +1,6 @@
 # Task Time Tracker
 
-Pet project for Enterprise Application Development with Ext JS and Spring
+Pet project for Enterprise Application Development with Ext JS and Spring with modern technologies
 
 ### Screenshot
 ![Screenshot](screenshot.PNG?raw=true "Screenshot")
