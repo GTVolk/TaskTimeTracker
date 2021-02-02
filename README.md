@@ -1,3 +1,3 @@
 # TaskTimeTracker
 
-Pet project for IBS 
+Pet project for IBS

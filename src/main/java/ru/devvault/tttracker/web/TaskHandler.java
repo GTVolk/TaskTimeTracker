@@ -1,8 +1,7 @@
 package ru.devvault.tttracker.web;
 
-import ru.devvault.tttracker.domain.*;
 import ru.devvault.tttracker.service.TaskService;
-import ru.devvault.tttracker.vo.Result;
+import ru.devvault.tttracker.util.Result;
 
 import java.util.List;
 import javax.json.JsonObject;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.devvault.tttracker.domain.Task;
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.Task;
+import ru.devvault.tttracker.entity.User;
 
 @Controller
 @RequestMapping("/task")

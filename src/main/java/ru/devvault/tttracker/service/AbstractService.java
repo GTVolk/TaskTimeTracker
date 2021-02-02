@@ -1,7 +1,7 @@
 package ru.devvault.tttracker.service;
 
 import ru.devvault.tttracker.dao.UserDao;
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

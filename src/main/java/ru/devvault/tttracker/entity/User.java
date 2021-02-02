@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.domain;
+package ru.devvault.tttracker.entity;
 
 import java.util.Objects;
 import javax.json.JsonObjectBuilder;
@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "ttt_user")
+@Table(name = "ttt_user", schema = "task_time_tracker")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsernamePassword", query = "SELECT u FROM User u WHERE u.password = :password AND (u.email = :username OR u.username = :username)"),
@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
 public class User extends AbstractEntity implements EntityItem<String>{
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @NotNull
@@ -142,7 +143,7 @@ public class User extends AbstractEntity implements EntityItem<String>{
 
     @Override
     public String toString() {
-        return "ru.devvault.tttracker.domain.User[ username=" + username + " ]";
+        return "ru.devvault.tttracker.entity.User[ username=" + username + " ]";
     }
 
     @Override
@@ -151,7 +152,7 @@ public class User extends AbstractEntity implements EntityItem<String>{
     }
 
     public boolean isAdmin() {
-        return adminRole == null ? false : adminRole.equals('Y');
+        return adminRole != null && adminRole.equals('Y');
     }
 
     @Override

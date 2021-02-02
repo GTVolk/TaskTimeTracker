@@ -5,7 +5,7 @@ Ext.define('TTT.view.tasklog.ManageTaskLogs', {
     layout: {
         type: 'border'
     },
-    initComponent: function() {
+    initComponent: function () {
         var me = this;
         var now = new Date();
         Ext.applyIf(me, {

@@ -1,6 +1,6 @@
 package ru.devvault.tttracker.dao;
 
-import ru.devvault.tttracker.domain.EntityItem;
+import ru.devvault.tttracker.entity.EntityItem;
 import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void persist(T o) {
         em.persist(o);
-        em.flush(); // TEST
+        em.flush();
 
         if (o instanceof EntityItem) {
             EntityItem<ID> item = (EntityItem<ID>) o;
@@ -44,7 +44,6 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
     public T merge(T o) {
 
         o = em.merge(o);
-        //em.flush();
         return o;
     }
 

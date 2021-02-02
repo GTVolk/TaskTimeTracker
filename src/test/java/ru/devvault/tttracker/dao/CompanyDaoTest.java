@@ -4,10 +4,12 @@
  */
 package ru.devvault.tttracker.dao;
 
-import ru.devvault.tttracker.domain.Company;
+import ru.devvault.tttracker.entity.Company;
 import java.util.List;
-import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class CompanyDaoTest extends AbstractDaoForTesting {
 
@@ -25,14 +27,13 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
 
         assertTrue(allItems.size() > 0);
 
-        // get the first item in the list
         Company c1 = allItems.get(0);
 
         int id = c1.getId();
 
         Company c2 = companyDao.find(id);
 
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
         logger.debug("\nFINISHED testFind()\n");
     }
 
@@ -49,7 +50,7 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
         if(rowCount > 0){
 
             List<Company> allItems = companyDao.findAll();
-            assertTrue("Company.findAll list not equal to row count of table ttt_company", rowCount == allItems.size());
+            assertEquals("Company.findAll list not equal to row count of table ttt_company", rowCount, allItems.size());
 
         } else {
             throw new IllegalStateException("INVALID TESTING SCENARIO: Company table is empty");
@@ -72,8 +73,7 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
 
         companyDao.persist(c);
 
-        //assertTrue(c.getId() != null); // only if flush() is called in GenericDaoImpl
-        assertTrue(c.getCompanyName().equals(NEW_NAME));
+        assertEquals(c.getCompanyName(), NEW_NAME);
 
         logger.debug("\nFINISHED testPersist()\n");
     }
@@ -93,7 +93,7 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
 
         c = companyDao.merge(c);
 
-        assertTrue(c.getCompanyName().equals(NEW_NAME));
+        assertEquals(c.getCompanyName(), NEW_NAME);
 
         logger.debug("\nFINISHED testMerge()\n");
 
@@ -112,8 +112,8 @@ public class CompanyDaoTest extends AbstractDaoForTesting {
         companyDao.remove(c);
 
         List<Company> allItems = companyDao.findAll();
-      
-        assertTrue("Deleted company may not be in findAll List", !allItems.contains(c) );
+
+        assertFalse("Deleted company may not be in findAll List", allItems.contains(c));
 
         logger.debug("\nFINISHED testRemove()\n");
     }

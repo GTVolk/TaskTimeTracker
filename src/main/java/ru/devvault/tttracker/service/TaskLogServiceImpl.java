@@ -3,16 +3,15 @@ package ru.devvault.tttracker.service;
 import ru.devvault.tttracker.dao.TaskDao;
 import ru.devvault.tttracker.dao.TaskLogDao;
 import java.util.List;
-import ru.devvault.tttracker.domain.*;
 import java.util.Date;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.devvault.tttracker.domain.Task;
-import ru.devvault.tttracker.domain.TaskLog;
-import ru.devvault.tttracker.domain.User;
-import ru.devvault.tttracker.vo.Result;
-import ru.devvault.tttracker.vo.ResultFactory;
+import ru.devvault.tttracker.entity.Task;
+import ru.devvault.tttracker.entity.TaskLog;
+import ru.devvault.tttracker.entity.User;
+import ru.devvault.tttracker.util.Result;
+import ru.devvault.tttracker.util.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Transactional

@@ -1,6 +1,6 @@
 package ru.devvault.tttracker.web;
 
-import ru.devvault.tttracker.domain.JsonItem;
+import ru.devvault.tttracker.entity.JsonItem;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.domain;
+package ru.devvault.tttracker.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "ttt_task_log")
+@Table(name = "ttt_task_log", schema = "task_time_tracker")
 @NamedQueries({
     @NamedQuery(name = "TaskLog.findByUser", query = "SELECT tl FROM TaskLog tl WHERE tl.user = :user AND tl.taskLogDate BETWEEN :startDate AND :endDate order by tl.taskLogDate ASC"),
     @NamedQuery(name = "TaskLog.findTaskLogCountByTask", query = "SELECT count(tl) FROM TaskLog tl WHERE tl.task = :task "),
@@ -50,7 +50,7 @@ public class TaskLog extends AbstractEntity implements EntityItem<Integer> {
     @Basic(optional = false)
     @NotNull
     @Column(name = "task_minutes")
-    private int taskMinutes;
+    private Integer taskMinutes;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @ManyToOne(optional = false)
     private User user;
@@ -100,7 +100,7 @@ public class TaskLog extends AbstractEntity implements EntityItem<Integer> {
         return taskMinutes;
     }
 
-    public void setTaskMinutes(int taskMinutes) {
+    public void setTaskMinutes(Integer taskMinutes) {
         this.taskMinutes = taskMinutes;
     }
 
@@ -141,7 +141,7 @@ public class TaskLog extends AbstractEntity implements EntityItem<Integer> {
 
     @Override
     public String toString() {
-        return "ru.devvault.tttracker.domain.TaskLog[ idTaskLog=" + idTaskLog + " ]";
+        return "ru.devvault.tttracker.entity.TaskLog[ idTaskLog=" + idTaskLog + " ]";
     }
 
     @Override

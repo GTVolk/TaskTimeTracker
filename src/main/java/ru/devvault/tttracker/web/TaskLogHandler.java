@@ -1,8 +1,7 @@
 package ru.devvault.tttracker.web;
 
-import ru.devvault.tttracker.domain.*;
 import ru.devvault.tttracker.service.TaskLogService;
-import ru.devvault.tttracker.vo.Result;
+import ru.devvault.tttracker.util.Result;
 import static ru.devvault.tttracker.web.SecurityHelper.getSessionUser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.devvault.tttracker.domain.TaskLog;
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.TaskLog;
+import ru.devvault.tttracker.entity.User;
 
 @Controller
 @RequestMapping("/taskLog")

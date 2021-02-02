@@ -2,13 +2,13 @@ package ru.devvault.tttracker.service;
 
 import ru.devvault.tttracker.dao.TaskLogDao;
 import java.util.List;
-import ru.devvault.tttracker.domain.*;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.devvault.tttracker.domain.User;
-import ru.devvault.tttracker.vo.Result;
-import ru.devvault.tttracker.vo.ResultFactory;
+import ru.devvault.tttracker.entity.User;
+import ru.devvault.tttracker.util.Result;
+import ru.devvault.tttracker.util.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Transactional
@@ -169,7 +169,6 @@ public class UserServiceImpl extends AbstractService implements UserService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Result<List<User>> findAll(String actionUsername){
-
         if(isValidUser(actionUsername)) {
 
             return ResultFactory.getSuccessResult(userDao.findAll());
@@ -177,7 +176,6 @@ public class UserServiceImpl extends AbstractService implements UserService {
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
-
     }
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)

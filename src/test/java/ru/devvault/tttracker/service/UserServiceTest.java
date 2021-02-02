@@ -2,14 +2,16 @@ package ru.devvault.tttracker.service;
 
 import ru.devvault.tttracker.dao.TaskLogDao;
 import ru.devvault.tttracker.dao.UserDao;
-import ru.devvault.tttracker.domain.TaskLog;
-import ru.devvault.tttracker.domain.User;
-import ru.devvault.tttracker.vo.Result;
+import ru.devvault.tttracker.entity.TaskLog;
+import ru.devvault.tttracker.entity.User;
+import ru.devvault.tttracker.util.Result;
 import java.util.Calendar;
 import java.util.List;
-import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.junit.Assert.*;
 
 public class UserServiceTest extends AbstractServiceForTesting {
 
@@ -19,12 +21,12 @@ public class UserServiceTest extends AbstractServiceForTesting {
     protected TaskLogDao taskLogDao;
     @Autowired
     protected UserDao userDao;
-    private final String TEST_USERNAME = "jsmith";
+    private final String TEST_USERNAME = "admin";
 
     @Test
     public void testAddNew() throws Exception {
 
-        String ADMIN_USERNAME = "bjones";
+        String ADMIN_USERNAME = "admin";
 
         logger.debug("\nSTARTED testAddNew()\n");
 
@@ -37,17 +39,17 @@ public class UserServiceTest extends AbstractServiceForTesting {
         ar = userService.store(this.TEST_USERNAME, "David", "Francis", "df@tttracker.com", "admpwd", 'Y', ADMIN_USERNAME);
 
         logger.debug(ar.getMsg());
-        assertTrue("Cannot assign email that is currently assigned to other user", !ar.isSuccess());
+        assertFalse("Cannot assign email that is currently assigned to other user", ar.isSuccess());
 
         ar = userService.store("user100", "David", "Francis", "user100@tttracker.com", "", 'Y', ADMIN_USERNAME);
 
         logger.debug(ar.getMsg());
-        assertTrue("Cannot set empty password for user", !ar.isSuccess());
+        assertFalse("Cannot set empty password for user", ar.isSuccess());
 
         ar = userService.store("user101", "David", "Francis", "  ", "validpwd", 'Y', ADMIN_USERNAME);
 
         logger.debug(ar.getMsg());
-        assertTrue("Cannot set empty email for user", !ar.isSuccess());
+        assertFalse("Cannot set empty email for user", ar.isSuccess());
 
         ar = userService.store(this.TEST_USERNAME, "David", "Francis", "diff@email.com", "validpwd", 'Y', ADMIN_USERNAME);
 
@@ -66,7 +68,7 @@ public class UserServiceTest extends AbstractServiceForTesting {
     @Test
     public void testRemove() throws Exception {
 
-        String ADMIN_USERNAME = "bjones";
+        String ADMIN_USERNAME = "admin";
         Calendar DEFAULT_START_DATE = Calendar.getInstance();
         Calendar DEFAULT_END_DATE = Calendar.getInstance();
         DEFAULT_START_DATE.set(Calendar.YEAR, 1900);
@@ -90,7 +92,7 @@ public class UserServiceTest extends AbstractServiceForTesting {
             // this user has task log assigned
             ar = userService.remove(TEST_USERNAME, ADMIN_USERNAME);
             logger.debug(ar.getMsg());
-            assertTrue("Cascading delete of user to task logs not allowed!", !ar.isSuccess());
+            assertFalse("Cascading delete of user to task logs not allowed!", ar.isSuccess());
 
         }
 
@@ -106,13 +108,13 @@ public class UserServiceTest extends AbstractServiceForTesting {
             // this user has task log assigned
             ar = userService.remove(TEST_USERNAME, ADMIN_USERNAME);
             logger.debug(ar.getMsg());
-            assertTrue("Cascading delete of user to task logs not allowed!", !ar.isSuccess());
+            assertFalse("Cascading delete of user to task logs not allowed!", ar.isSuccess());
 
         }
 
         ar = userService.remove(ADMIN_USERNAME, ADMIN_USERNAME);
         logger.debug(ar.getMsg());
-        assertTrue("Should not be able to delete yourself", !ar.isSuccess());
+        assertFalse("Should not be able to delete yourself", ar.isSuccess());
 
         logger.debug("\nFINISHED testRemove()\n");
     }
@@ -120,27 +122,27 @@ public class UserServiceTest extends AbstractServiceForTesting {
     @Test
     public void testLogon() {
 
-        Result<User> ar = userService.findByUsernamePassword("jsmith", "admin");
+        Result<User> ar = userService.findByUsernamePassword("admin", "admin");
 
-        assertTrue("Valid user could not be found for valid user/pwd", ar.getData() != null);
+        assertNotNull("Valid user could not be found for valid user/pwd", ar.getData());
         assertTrue(ar.isSuccess());
 
-        ar = userService.findByUsernamePassword("jsmith", "ADMIN");
+        ar = userService.findByUsernamePassword("admin", "ThisIsInvalidPassword!");
 
-        assertTrue("Invalid logic - valid user found with UPPERCASE password", ar.getData() == null);
-        assertTrue(!ar.isSuccess());
+        assertNull("Invalid logic - valid user found with UPPERCASE password", ar.getData());
+        assertFalse(ar.isSuccess());
 
-        ar = userService.findByUsernamePassword("JS@tttracker.com", "admin");
+        ar = userService.findByUsernamePassword("admin@devvault.ru", "admin");
 
-        assertTrue("Valid user could not be found for valid email/pwd", ar.getData() != null);
+        assertNotNull("Valid user could not be found for valid email/pwd", ar.getData());
         assertTrue(ar.isSuccess());
 
-        ar = userService.findByUsernamePassword("jsmith", "invalidadmin");
-        assertTrue("Invalid user verified with wrong password", ar.getData() == null);
-        assertTrue(!ar.isSuccess());
+        ar = userService.findByUsernamePassword("max", "ThisIsInvalidPassword!");
+        assertNull("Invalid user verified with wrong password", ar.getData());
+        assertFalse(ar.isSuccess());
 
         ar = userService.findByUsernamePassword("blah", "blah");
-        assertTrue("Invalid user verified with wrong username and password", ar.getData() == null);
-        assertTrue(!ar.isSuccess());
+        assertNull("Invalid user verified with wrong username and password", ar.getData());
+        assertFalse(ar.isSuccess());
     }
 }

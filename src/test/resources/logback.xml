@@ -15,7 +15,7 @@
     <logger name="ru.devvault.tttracker.dao" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="ru.devvault.tttracker.domain" level="DEBUG" additivity="false">
+    <logger name="ru.devvault.tttracker.model" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
     <logger name="ru.devvault.tttracker.service" level="DEBUG" additivity="false">

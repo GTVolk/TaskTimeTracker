@@ -1,19 +1,19 @@
 package ru.devvault.tttracker.service;
 
 import java.util.List;
-import ru.devvault.tttracker.domain.User;
-import ru.devvault.tttracker.vo.Result;
+import ru.devvault.tttracker.entity.User;
+import ru.devvault.tttracker.util.Result;
 
 public interface UserService {
 
     public Result<User> store(
-        String username,
-        String firstName,
-        String lastName,
-        String email,
-        String password,
-        Character adminRole,
-        String actionUsername);
+            String username,
+            String firstName,
+            String lastName,
+            String email,
+            String password,
+            Character adminRole,
+            String actionUsername);
 
     public Result<User> remove(String username, String actionUsername);
     public Result<User> find(String username, String actionUsername);

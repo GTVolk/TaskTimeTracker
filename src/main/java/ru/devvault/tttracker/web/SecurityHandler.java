@@ -1,8 +1,8 @@
 package ru.devvault.tttracker.web;
 
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.User;
 import ru.devvault.tttracker.service.UserService;
-import ru.devvault.tttracker.vo.Result;
+import ru.devvault.tttracker.util.Result;
 
 import static ru.devvault.tttracker.web.SecurityHelper.SESSION_ATTRIB_USER;
 import javax.servlet.http.HttpServletRequest;

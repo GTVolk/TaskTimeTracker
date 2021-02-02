@@ -1,6 +1,6 @@
 package ru.devvault.tttracker.dao;
 
-import ru.devvault.tttracker.domain.Company;
+import ru.devvault.tttracker.entity.Company;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;

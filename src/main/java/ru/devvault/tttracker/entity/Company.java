@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.domain;
+package ru.devvault.tttracker.entity;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "ttt_company")
+@Table(name = "ttt_company", schema = "task_time_tracker")
 @NamedQueries({
     @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c ORDER BY c.companyName ASC "),
     @NamedQuery(name = "Company.findByIdCompany", query = "SELECT c FROM Company c WHERE c.idCompany = :idCompany"),
@@ -93,11 +93,9 @@ public class Company extends AbstractEntity implements EntityItem<Integer> {
         return Objects.equals(this.idCompany, other.idCompany);
     }
 
-
-
     @Override
     public String toString() {
-        return "ru.devvault.tttracker.domain.Company[ idCompany=" + idCompany + " ]";
+        return "ru.devvault.tttracker.entity.Company[ idCompany=" + idCompany + " ]";
     }
 
     @Override

@@ -1,10 +1,9 @@
 package ru.devvault.tttracker.web;
 
-import ru.devvault.tttracker.domain.*;
 import ru.devvault.tttracker.service.CompanyService;
 import ru.devvault.tttracker.service.ProjectService;
 
-import ru.devvault.tttracker.vo.Result;
+import ru.devvault.tttracker.util.Result;
 import static ru.devvault.tttracker.web.SecurityHelper.getSessionUser;
 
 import java.util.List;
@@ -20,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.devvault.tttracker.domain.Company;
-import ru.devvault.tttracker.domain.EntityItem;
-import ru.devvault.tttracker.domain.Project;
-import ru.devvault.tttracker.domain.Task;
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.Company;
+import ru.devvault.tttracker.entity.EntityItem;
+import ru.devvault.tttracker.entity.Project;
+import ru.devvault.tttracker.entity.Task;
+import ru.devvault.tttracker.entity.User;
 
 @Controller
 @RequestMapping("/company")

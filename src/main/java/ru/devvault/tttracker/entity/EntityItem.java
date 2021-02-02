@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.domain;
+package ru.devvault.tttracker.entity;
 
 public interface EntityItem<T> {
     

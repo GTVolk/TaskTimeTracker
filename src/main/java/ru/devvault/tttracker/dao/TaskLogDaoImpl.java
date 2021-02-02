@@ -1,8 +1,8 @@
 package ru.devvault.tttracker.dao;
 
-import ru.devvault.tttracker.domain.Task;
-import ru.devvault.tttracker.domain.TaskLog;
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.Task;
+import ru.devvault.tttracker.entity.TaskLog;
+import ru.devvault.tttracker.entity.User;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.TemporalType;

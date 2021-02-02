@@ -1,10 +1,12 @@
 package ru.devvault.tttracker.dao;
 
-import ru.devvault.tttracker.domain.Company;
-import ru.devvault.tttracker.domain.Project;
-import ru.devvault.tttracker.domain.User;
-import static org.junit.Assert.assertTrue;
+import ru.devvault.tttracker.entity.Company;
+import ru.devvault.tttracker.entity.Project;
+import ru.devvault.tttracker.entity.User;
+
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class JpaTrapTest extends AbstractDaoForTesting {
 
@@ -24,8 +26,7 @@ public class JpaTrapTest extends AbstractDaoForTesting {
         c.getProjects().remove(p);
         c2.getProjects().add(p);
 
-        assertTrue("Original company still has project in its collection!",
-                !c.getProjects().contains(p));
+        assertFalse("Original company still has project in its collection!", c.getProjects().contains(p));
         assertTrue("Newly assigned company does not have project in its collection",
                 c2.getProjects().contains(p));
 
@@ -38,16 +39,15 @@ public class JpaTrapTest extends AbstractDaoForTesting {
 
         logger.debug("\nSTARTED testFindByUsernamePassword()\n");
 
-        // find by username/password combination
-        User user = userDao.findByUsernamePassword("bjones", "admin");
+        String Password = "admin";
+        String UserName = "admin";
+        User user = userDao.findByUsernamePassword(UserName, Password);
 
-        assertTrue("Unable to find valid user with correct username/password combination", 
-                user != null);
+        assertNotNull("Unable to find valid user with correct username/password combination", user);
 
-        user = userDao.findByUsernamePassword("bjones", "ADMIN");
+        user = userDao.findByUsernamePassword(UserName, "ThisIsInvalidPassword!");
 
-        assertTrue("User found with invalid password", 
-                user == null); 
+        assertNull("User found with invalid password", user);
         
         logger.debug("\nFINISHED testFindByUsernamePassword()\n");
     }

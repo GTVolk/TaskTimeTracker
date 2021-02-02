@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.domain;
+package ru.devvault.tttracker.entity;
 
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;

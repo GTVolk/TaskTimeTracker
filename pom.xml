@@ -13,34 +13,48 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
-        <spring.version>3.2.4.RELEASE</spring.version>
-        <logback.version>1.0.13</logback.version>
+        <spring.version>5.2.12.RELEASE</spring.version>
+        <persistence.version>2.2</persistence.version>
+        <hibernate.version>5.4.27.Final</hibernate.version>
+        <mysqljdbc.version>8.0.23</mysqljdbc.version>
+        <junit.version>4.13.1</junit.version>
+        <logback.version>1.2.3</logback.version>
+        <webapi.version>8.0.1</webapi.version>
+        <jetty.version>9.4.35.v20201120</jetty.version>
     </properties>
     
     <dependencies>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
+        <!--<dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>${persistence.version}</version>
             <scope>provided</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.5.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>        
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
-            <version>2.5.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>-->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <version>${webapi.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.1.4</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -50,14 +64,14 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.26</version>
-            <scope>provided</scope>
+            <version>${mysqljdbc.version}</version>
+            <scope>runtime</scope>
         </dependency>            
         <dependency>
             <groupId>org.springframework</groupId>
@@ -100,7 +114,6 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -131,7 +144,7 @@
                         <configuration>
                             <ignoreMissingFile>false</ignoreMissingFile>
                             <!--<file>src/main/webapp/all-classes.js</file>-->
-                            <file>src/main/webapp/build/app.js</file>
+                            <file>src/main/webapp/app.js</file>
                             <regex>false</regex>
                             <replacements>
                                 <replacement>
@@ -263,14 +276,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/ttt</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-            <id>eclipselink</id>
-            <layout>default</layout>
-            <name>Repository for library EclipseLink (JPA 2.1)</name>
-        </repository>
-    </repositories>
 </project>

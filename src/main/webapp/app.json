@@ -239,6 +239,9 @@
      */
     "css": [
         {
+            "path": "resources/styles.css"
+        },
+        {
             // this entry uses an ant variable that is the calculated
             // value of the generated output css file for the app,
             // defined in .sencha/app/defaults.properties

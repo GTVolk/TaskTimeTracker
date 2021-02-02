@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.vo;
+package ru.devvault.tttracker.util;
 
 public class ResultFactory {
 

@@ -1,4 +1,4 @@
-package ru.devvault.tttracker.domain;
+package ru.devvault.tttracker.entity;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "ttt_project")
+@Table(name = "ttt_project", schema = "task_time_tracker")
 @NamedQueries({
     @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p ORDER BY p.projectName"),
     @NamedQuery(name = "Project.findByIdProject", query = "SELECT p FROM Project p WHERE p.idProject = :idProject"),
@@ -42,9 +42,7 @@ public class Project extends AbstractEntity implements EntityItem<Integer> {
     private Company company;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private List<Task> tasks;
-
-    public Project() {
-    }
+    public Project() { }
 
     public Project(Integer idProject) {
         this.idProject = idProject;
@@ -108,7 +106,7 @@ public class Project extends AbstractEntity implements EntityItem<Integer> {
 
     @Override
     public String toString() {
-        return "ru.devvault.tttracker.domain.Project[ idProject=" + idProject + " ]";
+        return "ru.devvault.tttracker.entity.Project[ idProject=" + idProject + " ]";
     }
 
     @Override

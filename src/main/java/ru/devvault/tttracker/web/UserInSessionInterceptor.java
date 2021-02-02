@@ -1,6 +1,6 @@
 package ru.devvault.tttracker.web;
 
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

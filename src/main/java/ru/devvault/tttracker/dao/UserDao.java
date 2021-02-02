@@ -1,6 +1,6 @@
 package ru.devvault.tttracker.dao;
 
-import ru.devvault.tttracker.domain.User;
+import ru.devvault.tttracker.entity.User;
 import java.util.List;
 
 public interface UserDao extends GenericDao<User, String> {
