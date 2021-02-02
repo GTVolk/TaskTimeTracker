@@ -1,7 +1,8 @@
 # Task Time Tracker
 
-Pet project for IBS!
+Pet project for Enterprise Application Development with Ext JS and Spring
 
+### Screenshot
 ![Screenshot](screenshot.PNG?raw=true "Screenshot")
 
 ## Requirements
