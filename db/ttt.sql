@@ -1,6 +1,3 @@
-drop database if exists task_time_tracker;
-create database task_time_tracker;
-use task_time_tracker;
 create table ttt_company(
     id_company      int unsigned not null auto_increment,
     company_name    varchar(200) not null,

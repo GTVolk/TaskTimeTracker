@@ -1,5 +1,6 @@
 package ru.devvault.tttracker.service;
 
+import org.junit.Test;
 import ru.devvault.tttracker.dao.TaskLogDao;
 import ru.devvault.tttracker.dao.UserDao;
 import ru.devvault.tttracker.entity.TaskLog;
@@ -8,7 +9,6 @@ import ru.devvault.tttracker.util.Result;
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.*;

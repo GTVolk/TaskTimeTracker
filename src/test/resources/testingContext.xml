@@ -10,7 +10,7 @@
 
     <bean id="propertyConfigurer"
           class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"
-          p:location="classpath:jdbc.properties" />
+          p:location="jdbc.properties" />
 
     <bean id="tttDataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -29,7 +29,7 @@
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="tttDataSource"
           p:jpaVendorAdapter-ref="jpaVendorAdapter"
-          p:persistenceXmlLocation="classpath:test-persistence.xml"
+          p:persistenceXmlLocation="test-persistence.xml"
     />
 
     <!-- Transaction manager for JTA  -->
