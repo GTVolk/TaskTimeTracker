@@ -15,7 +15,7 @@
         <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
         <spring.version>5.2.12.RELEASE</spring.version>
         <persistence.version>2.2</persistence.version>
-        <hibernate.version>5.4.27.Final</hibernate.version>
+        <hibernate.version>5.6.7.Final</hibernate.version>
         <json.version>1.1.4</json.version>
         <mysqljdbc.version>8.0.23</mysqljdbc.version>
         <junit.version>4.13.1</junit.version>
