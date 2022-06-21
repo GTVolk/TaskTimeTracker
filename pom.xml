@@ -17,7 +17,7 @@
         <persistence.version>2.2</persistence.version>
         <hibernate.version>5.4.27.Final</hibernate.version>
         <json.version>1.1.4</json.version>
-        <mysqljdbc.version>8.0.23</mysqljdbc.version>
+        <mysqljdbc.version>8.0.28</mysqljdbc.version>
         <junit.version>4.13.1</junit.version>
         <logback.version>1.2.3</logback.version>
         <webapi.version>8.0.1</webapi.version>
